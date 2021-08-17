@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 project(libserialport
-        VERSION 1.1.0
+        VERSION 1.1.1
         LANGUAGES C)
 
 set(CMAKE_C_STANDARD 99)
@@ -31,3 +31,5 @@ install(TARGETS libserialport
 
 configure_file(libserialport.pc.in libserialport.pc @ONLY)
 install(FILES ${CMAKE_BINARY_DIR}/libserialport.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
+
+include(CPack)
