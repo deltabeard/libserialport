@@ -22,6 +22,8 @@ endif()
 
 if(MSVC)
     add_compile_definitions(LIBSERIALPORT_MSBUILD)
+else()
+    add_compile_definitions(SP_PRIV=static)
 endif()
 
 set_target_properties(libserialport PROPERTIES PUBLIC_HEADER inc/libserialport.h)
