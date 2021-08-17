@@ -7,24 +7,31 @@ set(CMAKE_C_STANDARD 99)
 include(CheckSymbolExists)
 
 add_library(libserialport src/serialport.c)
-target_include_directories(libserialport PRIVATE inc)
+target_include_directories(libserialport
+        PUBLIC
+        $<INSTALL_INTERFACE:inc>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+        )
+target_compile_features(libserialport PRIVATE c_std_99)
 
-if(WIN32)
+if (WIN32)
     target_sources(libserialport PRIVATE src/windows.c)
-elseif(APPLE)
+elseif (APPLE)
     target_sources(libserialport PRIVATE src/macosx.c)
-elseif(UNIX)
+elseif (UNIX)
     target_sources(libserialport PRIVATE src/linux.c src/linux_termios.c)
     #check_symbol_exists(serial_struct "linux/serial" HAVE_SERIAL_STRUCT)
-elseif(CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+elseif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
     target_sources(libserialport PRIVATE src/freebsd.c)
-endif()
+endif ()
 
-if(MSVC)
+if (MSVC)
     add_compile_definitions(LIBSERIALPORT_MSBUILD)
-else()
+else ()
     add_compile_definitions(SP_PRIV=static)
-endif()
+endif ()
 
 set_target_properties(libserialport PROPERTIES PUBLIC_HEADER inc/libserialport.h)
 
