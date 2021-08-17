@@ -4,6 +4,7 @@ project(libserialport
         LANGUAGES C)
 
 set(CMAKE_C_STANDARD 99)
+include(CheckSymbolExists)
 
 add_library(libserialport src/serialport.c)
 target_include_directories(libserialport PRIVATE inc)
@@ -12,6 +13,7 @@ if(WIN32)
     target_sources(libserialport PRIVATE src/windows.c)
 elseif(UNIX)
     target_sources(libserialport PRIVATE src/linux.c src/linux_termios.c)
+    #check_symbol_exists(serial_struct "linux/serial" HAVE_SERIAL_STRUCT)
 elseif(APPLE)
     target_sources(libserialport PRIVATE src/macosx.c)
 elseif(CMAKE_SYSTEM_NAME MATCHES "FreeBSD")

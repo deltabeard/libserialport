@@ -76,7 +76,6 @@
  *    device description.
  */
 
-#include <config.h>
 #include <unistd.h>
 #include <stdint.h>
 #include <stdlib.h>

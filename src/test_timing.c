@@ -1,4 +1,3 @@
-#include "config.h"
 #include "libserialport.h"
 #include "libserialport_internal.h"
 #include <assert.h>
