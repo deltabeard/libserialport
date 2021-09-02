@@ -45,6 +45,8 @@
 /* If building with MS tools, define necessary things that
    would otherwise appear in config.h. */
 #define SP_PRIV __declspec(dllexport)
+#else
+#define SP_PRIV
 #endif
 
 #include "libserialport.h"
