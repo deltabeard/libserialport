@@ -20,6 +20,7 @@ if (WIN32)
     target_sources(libserialport PRIVATE src/windows.c)
     target_link_libraries(libserialport PRIVATE setupapi)
     add_compile_definitions(LIBSERIALPORT_MSBUILD)
+    add_compile_definitions(SP_PRIV=__declspec\(dllexport\))
 elseif (APPLE)
     target_sources(libserialport PRIVATE src/macosx.c)
 elseif (UNIX)
@@ -29,7 +30,9 @@ elseif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
     target_sources(libserialport PRIVATE src/freebsd.c)
 endif ()
 
-#add_compile_definitions(SP_PRIV=__declspec(dllexport))
+if(NOT WIN32)
+    add_compile_definitions(SP_PRIV=\ )
+endif()
 
 set_target_properties(libserialport PROPERTIES PUBLIC_HEADER inc/libserialport.h)
 
