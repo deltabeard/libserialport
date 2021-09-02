@@ -29,7 +29,7 @@ elseif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
     target_sources(libserialport PRIVATE src/freebsd.c)
 endif ()
 
-add_compile_definitions(SP_PRIV=)
+#add_compile_definitions(SP_PRIV=__declspec(dllexport))
 
 set_target_properties(libserialport PROPERTIES PUBLIC_HEADER inc/libserialport.h)
 

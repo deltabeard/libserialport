@@ -44,7 +44,7 @@
 #ifdef LIBSERIALPORT_MSBUILD
 /* If building with MS tools, define necessary things that
    would otherwise appear in config.h. */
-#define SP_PRIV
+#define SP_PRIV __declspec(dllexport)
 #endif
 
 #include "libserialport.h"
